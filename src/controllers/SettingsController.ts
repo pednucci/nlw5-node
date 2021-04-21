@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, response, Response } from 'express'
 import { SettingsService } from '../services/SettingsService';
 
 class SettingsController {
@@ -8,9 +8,14 @@ class SettingsController {
 
         const settingsService = new SettingsService()
 
-        const settings = await settingsService.create({ chat, username })
-
-        return res.json(settings)
+        try{
+            const settings = await settingsService.create({ chat, username })
+            return res.json(settings)
+        }catch(err){
+            return res.status(400).json({
+                message: err.message
+            })
+        }
     }
 }
 

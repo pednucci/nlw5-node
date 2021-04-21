@@ -13,7 +13,7 @@ class SettingsController {
             return res.json(settings)
         }catch(err){
             return res.status(400).json({
-                message: err.message
+                message: err.message,
             })
         }
     }

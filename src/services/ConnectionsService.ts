@@ -53,6 +53,16 @@ class ConnectionsService {
 
         return connection;
     }
+
+    async updateAdminID(user_id: string, admin_id: string){
+        const settings = await this.connectionsRepository.createQueryBuilder().
+        update(Connection)
+        .set({admin_id})       //param
+        .where("user_id = :user_id", {
+            user_id
+        })
+        .execute();
+    }
 }
 
 export { ConnectionsService }
